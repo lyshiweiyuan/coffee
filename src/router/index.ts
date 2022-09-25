@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Algorithm from '../views/Algorithm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,24 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      redirect: {
+        name: 'algorithm'
+      }
+    },
+    {
+      path: '/algorithm',
+      name: 'algorithm',
+      redirect: {
+        name: 'recall'
+      },
+      component: Algorithm,
+      children: [
+        {
+          path: 'recall',
+          name: 'recall',
+          component: () => import('../views/recall/index.vue')
+        }
+      ]
     },
     {
       path: '/about',
